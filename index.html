@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCSC 2026–2031 Strategic Plan Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1F4E79; --blue: #2E75B6; --sky: #EBF3FB;
+    --gold: #C49A2B; --gold-light: #FDF6E3;
+    --text: #1A1A2E; --muted: #5A6070; --border: #D8E4F0;
+    --white: #ffffff; --bg: #F7FAFD;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .hero { background: var(--navy); position: relative; overflow: hidden; padding: 56px 24px 48px; text-align: center; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(46,117,182,0.35) 0%, transparent 65%), radial-gradient(ellipse at 20% 80%, rgba(196,154,43,0.15) 0%, transparent 50%); pointer-events: none; }
+  .hero-logo { width: 64px; height: 64px; background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 26px; }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 5vw, 40px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 8px; }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 28px; }
+  .deadline-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(196,154,43,0.18); border: 1px solid rgba(196,154,43,0.4); border-radius: 100px; padding: 7px 18px; font-size: 13px; font-weight: 500; color: #F0C96A; }
+
+  .intro-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .intro-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin: -28px auto 32px; position: relative; box-shadow: 0 4px 24px rgba(31,78,121,0.08); }
+  .intro-card p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card strong { color: var(--navy); }
+
+  .progress-wrap { max-width: 720px; margin: 0 auto 28px; padding: 0 20px; }
+  .progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .progress-label { font-size: 12px; font-weight: 500; color: var(--muted); }
+  .progress-count { font-size: 12px; font-weight: 500; color: var(--navy); }
+  .progress-bar-bg { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--blue), var(--gold)); border-radius: 99px; transition: width 0.4s ease; }
+
+  .section-wrap { max-width: 720px; margin: 0 auto 24px; padding: 0 20px; }
+  .section-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(31,78,121,0.05); transition: box-shadow 0.2s; }
+  .section-card:focus-within { box-shadow: 0 4px 20px rgba(31,78,121,0.12); }
+  .section-header { display: flex; align-items: center; gap: 14px; padding: 20px 24px 18px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, var(--sky) 0%, #fff 100%); }
+  .section-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--navy); }
+  .section-num { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 2px; }
+
+  .question-block { padding: 22px 24px; border-bottom: 1px solid var(--border); }
+  .question-block:last-child { border-bottom: none; }
+  .question-label { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; display: flex; gap: 8px; align-items: flex-start; }
+  .q-num { min-width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 1px; flex-shrink: 0; }
+  .question-hint { font-size: 12px; color: var(--muted); margin-bottom: 12px; padding-left: 30px; font-style: italic; }
+  textarea { width: 100%; min-height: 96px; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--bg); resize: vertical; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+  textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(46,117,182,0.12); background: #fff; }
+  textarea::placeholder { color: #B0BAC8; }
+  .char-count { text-align: right; font-size: 11px; color: var(--muted); margin-top: 4px; transition: color 0.2s; }
+  .char-count.warning { color: var(--gold); }
+
+  .name-wrap { max-width: 720px; margin: 0 auto 24px; padding: 0 20px; }
+  .name-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; box-shadow: 0 2px 12px rgba(31,78,121,0.05); }
+  .name-label { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .name-hint { font-size: 12px; color: var(--muted); margin-bottom: 12px; font-style: italic; }
+  input[type="text"] { width: 100%; height: 44px; border: 1.5px solid var(--border); border-radius: 10px; padding: 0 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  input[type="text"]:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(46,117,182,0.12); background: #fff; }
+
+  .submit-wrap { max-width: 720px; margin: 0 auto 16px; padding: 0 20px; }
+  .submit-card { background: var(--navy); border-radius: 16px; padding: 28px 24px; text-align: center; }
+  .submit-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; margin-bottom: 6px; }
+  .submit-card p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+  .btn-submit { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; padding: 13px 36px; border-radius: 100px; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s; box-shadow: 0 4px 16px rgba(196,154,43,0.4); }
+  .btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(196,154,43,0.5); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .ways-wrap { max-width: 720px; margin: 0 auto 48px; padding: 0 20px; }
+  .ways-title { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 16px; }
+  .ways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .way-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 16px 14px; text-align: center; }
+  .way-icon { font-size: 22px; margin-bottom: 8px; }
+  .way-label { font-size: 11px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .way-detail { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* Config banner — shown until script URL is set */
+  .config-banner { max-width: 720px; margin: 0 auto 20px; padding: 0 20px; }
+  .config-inner { background: #FFF8E1; border: 1.5px solid #F0C96A; border-radius: 12px; padding: 16px 20px; display: flex; gap: 12px; align-items: flex-start; }
+  .config-inner.hidden { display: none; }
+  .config-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .config-text { font-size: 13px; color: #7A5800; line-height: 1.6; }
+  .config-text strong { color: #5A3E00; }
+  .config-url-row { display: flex; gap: 8px; margin-top: 10px; }
+  .config-url-row input { flex: 1; height: 36px; border: 1px solid #E0BC5A; border-radius: 8px; padding: 0 10px; font-size: 12px; background: #fff; outline: none; font-family: monospace; }
+  .config-url-row input:focus { border-color: var(--gold); }
+  .btn-save-url { background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 0 16px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+  .success-overlay { display: none; position: fixed; inset: 0; background: rgba(31,78,121,0.85); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
+  .success-overlay.show { display: flex; }
+  .success-box { background: #fff; border-radius: 20px; padding: 48px 36px; text-align: center; max-width: 420px; width: 100%; animation: popIn 0.3s ease; }
+  @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .success-tick { font-size: 52px; margin-bottom: 16px; }
+  .success-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--navy); margin-bottom: 10px; }
+  .success-box p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .btn-close { background: var(--navy); color: #fff; border: none; border-radius: 100px; cursor: pointer; padding: 12px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; }
+
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(31,78,121,0.3); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 520px) {
+    .ways-grid { grid-template-columns: 1fr; }
+    .intro-card, .section-header, .question-block { padding-left: 18px; padding-right: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">🏅</div>
+  <div class="hero-eyebrow">Pemberton Community Sports Club</div>
+  <h1>Strategic Plan <span>2026–2031</span></h1>
+  <div class="hero-sub">Member &amp; Stakeholder Survey</div>
+  <div class="deadline-badge">
+    📅 &nbsp;Responses due Thursday 25 June 2026
+  </div>
+</div>
+
+<div class="intro-wrap">
+  <div class="intro-card">
+    <p><strong>Your elected PCSC Executive Committee needs your assistance.</strong> As a requirement of the Fee for Service Agreement between the PCSC and the Shire of Manjimup, the Executive Committee is developing the <strong>2026–2031 PCSC Strategic Plan</strong>.</p>
+    <p>The Strategic Plan will provide clear direction, assist in setting priorities and allocating resources effectively, and ensure the Executive Committee works towards common goals for all PCSC Clubs, Community Groups and Club members.</p>
+    <p>Please complete the short questionnaire below. <strong>Your input is genuinely valued</strong> — every response helps shape the Club's direction for the next five years. Thank you in anticipation.</p>
+    <p style="font-size:13px; color:var(--navy); font-weight:500;">— John Bendotti (President), Jodie Omodei (Vice-President), Karen Fisher (Treasurer), Mari Sebire, Shane Salmon &amp; Hazel Cole (Secretary)</p>
+  </div>
+</div>
+
+<!-- CONFIG BANNER -->
+<div class="config-banner">
+  <div class="config-inner" id="config-banner">
+    <div class="config-icon">⚙️</div>
+    <div class="config-text">
+      <strong>One-time setup required:</strong> Paste your Google Apps Script Web App URL below to connect this survey to Google Sheets. Follow the setup guide that came with this file — it takes about 5 minutes.
+      <div class="config-url-row">
+        <input type="text" id="script-url-input" placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec">
+        <button class="btn-save-url" onclick="saveScriptUrl()">Save &amp; Connect</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-row">
+    <span class="progress-label">Your progress</span>
+    <span class="progress-count" id="prog-count">0 of 10 answered</span>
+  </div>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar"></div></div>
+</div>
+
+<div class="name-wrap">
+  <div class="name-card">
+    <div class="name-label">Your name</div>
+    <div class="name-hint">Optional — responses can be submitted anonymously</div>
+    <input type="text" id="respondent-name" placeholder="e.g. Jane Smith, Pemberton Football Club…">
+  </div>
+</div>
+
+<!-- SECTIONS -->
+<div class="section-wrap">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon" style="background:#EBF3FB;">🔍</div>
+      <div><div class="section-num">Section 1 of 5</div><div class="section-title">Understanding the Current Situation</div></div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">1</span>What are the biggest challenges the PCSC is facing right now?</div>
+      <div class="question-hint">Identifying challenges will allow us to develop strategies to overcome them.</div>
+      <textarea id="q1" placeholder="Share your thoughts on the challenges facing the Club…" maxlength="1000" oninput="onType(this,'1')"></textarea>
+      <div class="char-count" id="cc-1">0 / 1000</div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">2</span>What opportunities do you see for the PCSC in the near future?</div>
+      <div class="question-hint">Recognising opportunities will help us capitalise on them for growth and development.</div>
+      <textarea id="q2" placeholder="What possibilities or untapped potential do you see…" maxlength="1000" oninput="onType(this,'2')"></textarea>
+      <div class="char-count" id="cc-2">0 / 1000</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FDF6E3;">🎯</div>
+      <div><div class="section-num">Section 2 of 5</div><div class="section-title">Vision and Goals</div></div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">3</span>What is your vision for the PCSC in the next 5 years?</div>
+      <div class="question-hint">This helps in aligning our strategic goals with members' expectations.</div>
+      <textarea id="q3" placeholder="Describe what a thriving PCSC looks like to you in 2031…" maxlength="1000" oninput="onType(this,'3')"></textarea>
+      <div class="char-count" id="cc-3">0 / 1000</div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">4</span>How can we ensure that these goals are realistic and achievable?</div>
+      <div class="question-hint">Ensuring feasibility is crucial for motivation and successful implementation.</div>
+      <textarea id="q4" placeholder="What steps, safeguards or approaches would help…" maxlength="1000" oninput="onType(this,'4')"></textarea>
+      <div class="char-count" id="cc-4">0 / 1000</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon" style="background:#EDF7EE;">🤝</div>
+      <div><div class="section-num">Section 3 of 5</div><div class="section-title">Member Engagement</div></div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">5</span>How can we increase member participation and engagement in PCSC activities?</div>
+      <div class="question-hint">Member engagement is vital for the vibrancy and success of the PCSC.</div>
+      <textarea id="q5" placeholder="Ideas for bringing more members into Club life…" maxlength="1000" oninput="onType(this,'5')"></textarea>
+      <div class="char-count" id="cc-5">0 / 1000</div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">6</span>What types of activities or programs would you like to see introduced or expanded?</div>
+      <div class="question-hint">Knowing member preferences will help in planning relevant activities.</div>
+      <textarea id="q6" placeholder="New events, sports, social programs, facilities…" maxlength="1000" oninput="onType(this,'6')"></textarea>
+      <div class="char-count" id="cc-6">0 / 1000</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon" style="background:#FDF6E3;">💰</div>
+      <div><div class="section-num">Section 4 of 5</div><div class="section-title">Resources and Funding</div></div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">7</span>What are potential new sources of funding or revenue for the PCSC?</div>
+      <div class="question-hint">Identifying funding opportunities is essential for financial stability and growth.</div>
+      <textarea id="q7" placeholder="Grants, sponsorships, events, partnerships, facility hire…" maxlength="1000" oninput="onType(this,'7')"></textarea>
+      <div class="char-count" id="cc-7">0 / 1000</div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">8</span>How can we better utilise existing resources to achieve PCSC goals?</div>
+      <div class="question-hint">Efficient use of resources will enhance productivity and outcomes.</div>
+      <textarea id="q8" placeholder="Facilities, volunteers, equipment, partnerships…" maxlength="1000" oninput="onType(this,'8')"></textarea>
+      <div class="char-count" id="cc-8">0 / 1000</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon" style="background:#F3EEFB;">🌐</div>
+      <div><div class="section-num">Section 5 of 5</div><div class="section-title">External Relations</div></div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">9</span>What new partnerships or collaborations could benefit the PCSC?</div>
+      <div class="question-hint">Exploring new partnerships can bring fresh opportunities and resources.</div>
+      <textarea id="q9" placeholder="Local businesses, government, schools, other clubs…" maxlength="1000" oninput="onType(this,'9')"></textarea>
+      <div class="char-count" id="cc-9">0 / 1000</div>
+    </div>
+    <div class="question-block">
+      <div class="question-label"><span class="q-num">10</span>How can we increase the PCSC's visibility and reputation in the community?</div>
+      <div class="question-hint">Visibility and reputation will attract new members and supporters.</div>
+      <textarea id="q10" placeholder="Marketing, events, community involvement, social media…" maxlength="1000" oninput="onType(this,'10')"></textarea>
+      <div class="char-count" id="cc-10">0 / 1000</div>
+    </div>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <div class="submit-card">
+    <h3>Ready to submit?</h3>
+    <p>Your response will be sent directly to the PCSC Executive Committee and recorded in the Strategic Plan database.</p>
+    <button class="btn-submit" id="submit-btn" onclick="submitForm()">
+      Submit my response
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="ways-wrap">
+  <div class="ways-title">Other ways to submit</div>
+  <div class="ways-grid">
+    <div class="way-card">
+      <div class="way-icon">✉️</div>
+      <div class="way-label">Email</div>
+      <div class="way-detail">secretary@pembertoncsc.com.au</div>
+    </div>
+    <div class="way-card">
+      <div class="way-icon">🏢</div>
+      <div class="way-label">In Person</div>
+      <div class="way-detail">Hardcopies at Reception or at the Bar</div>
+    </div>
+    <div class="way-card">
+      <div class="way-icon">📮</div>
+      <div class="way-label">Post</div>
+      <div class="way-detail">PO Box 302<br>Pemberton WA 6260</div>
+    </div>
+  </div>
+</div>
+
+<div class="success-overlay" id="success-overlay">
+  <div class="success-box">
+    <div class="success-tick">✅</div>
+    <h2>Thank you!</h2>
+    <p>Your response has been recorded in the PCSC Strategic Plan database and will be reviewed by the Executive Committee.</p>
+    <p style="font-size:13px;">The deadline for responses is <strong>Thursday 25 June 2026</strong>.</p>
+    <br>
+    <button class="btn-close" onclick="document.getElementById('success-overlay').classList.remove('show'); resetForm();">Close</button>
+  </div>
+</div>
+
+<script>
+  // ── Script URL storage ──────────────────────────────────────────────────────
+  const STORAGE_KEY = 'pcsc_script_url';
+
+  function getScriptUrl() {
+    return localStorage.getItem(STORAGE_KEY) || '';
+  }
+
+  function saveScriptUrl() {
+    const val = document.getElementById('script-url-input').value.trim();
+    if (!val.startsWith('https://script.google.com')) {
+      alert('That doesn\'t look like a valid Google Apps Script URL. It should start with https://script.google.com');
+      return;
+    }
+    localStorage.setItem(STORAGE_KEY, val);
+    document.getElementById('config-banner').classList.add('hidden');
+    alert('✅ Connected! The survey will now save responses to your Google Sheet.');
+  }
+
+  // Hide banner if URL already saved
+  window.addEventListener('load', () => {
+    if (getScriptUrl()) {
+      document.getElementById('config-banner').classList.add('hidden');
+    }
+  });
+
+  // ── Progress tracking ───────────────────────────────────────────────────────
+  function onType(el, num) {
+    const len = el.value.length;
+    const cc = document.getElementById('cc-' + num);
+    cc.textContent = len + ' / 1000';
+    cc.classList.toggle('warning', len > 800);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    let answered = 0;
+    for (let i = 1; i <= 10; i++) {
+      if (document.getElementById('q' + i).value.trim()) answered++;
+    }
+    document.getElementById('prog-count').textContent = answered + ' of 10 answered';
+    document.getElementById('prog-bar').style.width = (answered / 10 * 100) + '%';
+  }
+
+  // ── Submit ──────────────────────────────────────────────────────────────────
+  async function submitForm() {
+    let answered = 0;
+    for (let i = 1; i <= 10; i++) {
+      if (document.getElementById('q' + i).value.trim()) answered++;
+    }
+    if (answered < 5) {
+      alert('Please answer at least 5 questions before submitting. You\'ve answered ' + answered + ' so far.');
+      return;
+    }
+
+    const scriptUrl = getScriptUrl();
+    if (!scriptUrl) {
+      alert('The survey isn\'t connected to Google Sheets yet. Please paste the Apps Script URL in the setup banner at the top of the page.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('config-banner').classList.remove('hidden');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Submitting…';
+
+    const payload = {
+      timestamp:   new Date().toISOString(),
+      name:        document.getElementById('respondent-name').value.trim() || 'Anonymous',
+      q1:  document.getElementById('q1').value.trim(),
+      q2:  document.getElementById('q2').value.trim(),
+      q3:  document.getElementById('q3').value.trim(),
+      q4:  document.getElementById('q4').value.trim(),
+      q5:  document.getElementById('q5').value.trim(),
+      q6:  document.getElementById('q6').value.trim(),
+      q7:  document.getElementById('q7').value.trim(),
+      q8:  document.getElementById('q8').value.trim(),
+      q9:  document.getElementById('q9').value.trim(),
+      q10: document.getElementById('q10').value.trim(),
+    };
+
+    try {
+      // Use no-cors mode — Apps Script doesn't return CORS headers on redirect
+      await fetch(scriptUrl, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      });
+      // no-cors means we can't read the response, but if fetch didn't throw it sent OK
+      document.getElementById('success-overlay').classList.add('show');
+    } catch (err) {
+      alert('There was a problem submitting your response. Please try again, or email your answers to secretary@pembertoncsc.com.au\n\nError: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = 'Submit my response <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    }
+  }
+
+  function resetForm() {
+    for (let i = 1; i <= 10; i++) {
+      document.getElementById('q' + i).value = '';
+      document.getElementById('cc-' + i).textContent = '0 / 1000';
+    }
+    document.getElementById('respondent-name').value = '';
+    updateProgress();
+  }
+</script>
+</body>
+</html>
