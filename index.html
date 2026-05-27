@@ -81,16 +81,7 @@
   .way-detail { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
   /* Config banner — shown until script URL is set */
-  .config-banner { max-width: 720px; margin: 0 auto 20px; padding: 0 20px; }
-  .config-inner { background: #FFF8E1; border: 1.5px solid #F0C96A; border-radius: 12px; padding: 16px 20px; display: flex; gap: 12px; align-items: flex-start; }
-  .config-inner.hidden { display: none; }
-  .config-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .config-text { font-size: 13px; color: #7A5800; line-height: 1.6; }
-  .config-text strong { color: #5A3E00; }
-  .config-url-row { display: flex; gap: 8px; margin-top: 10px; }
-  .config-url-row input { flex: 1; height: 36px; border: 1px solid #E0BC5A; border-radius: 8px; padding: 0 10px; font-size: 12px; background: #fff; outline: none; font-family: monospace; }
-  .config-url-row input:focus { border-color: var(--gold); }
-  .btn-save-url { background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 0 16px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
 
   .success-overlay { display: none; position: fixed; inset: 0; background: rgba(31,78,121,0.85); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
   .success-overlay.show { display: flex; }
@@ -131,19 +122,7 @@
   </div>
 </div>
 
-<!-- CONFIG BANNER -->
-<div class="config-banner">
-  <div class="config-inner" id="config-banner">
-    <div class="config-icon">⚙️</div>
-    <div class="config-text">
-      <strong>One-time setup required:</strong> Paste your Google Apps Script Web App URL below to connect this survey to Google Sheets. Follow the setup guide that came with this file — it takes about 5 minutes.
-      <div class="config-url-row">
-        <input type="text" id="script-url-input" placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec">
-        <button class="btn-save-url" onclick="saveScriptUrl()">Save &amp; Connect</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="progress-wrap">
   <div class="progress-row">
@@ -311,30 +290,8 @@
 </div>
 
 <script>
-  // ── Script URL storage ──────────────────────────────────────────────────────
-  const STORAGE_KEY = 'pcsc_script_url';
-
-  function getScriptUrl() {
-    return localStorage.getItem(STORAGE_KEY) || '';
-  }
-
-  function saveScriptUrl() {
-    const val = document.getElementById('script-url-input').value.trim();
-    if (!val.startsWith('https://script.google.com')) {
-      alert('That doesn\'t look like a valid Google Apps Script URL. It should start with https://script.google.com');
-      return;
-    }
-    localStorage.setItem(STORAGE_KEY, val);
-    document.getElementById('config-banner').classList.add('hidden');
-    alert('✅ Connected! The survey will now save responses to your Google Sheet.');
-  }
-
-  // Hide banner if URL already saved
-  window.addEventListener('load', () => {
-    if (getScriptUrl()) {
-      document.getElementById('config-banner').classList.add('hidden');
-    }
-  });
+  // ── Google Apps Script endpoint — replace with your deployed Web App URL ────
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf7gFxm6MoQ4Nk1JuaGD7X_3E7YoXkr9cgenNd7Dpekru48un15TdLD4slL1pAsoY/exec';
 
   // ── Progress tracking ───────────────────────────────────────────────────────
   function onType(el, num) {
@@ -365,11 +322,9 @@
       return;
     }
 
-    const scriptUrl = getScriptUrl();
-    if (!scriptUrl) {
-      alert('The survey isn\'t connected to Google Sheets yet. Please paste the Apps Script URL in the setup banner at the top of the page.');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      document.getElementById('config-banner').classList.remove('hidden');
+    const scriptUrl = SCRIPT_URL;
+    if (!scriptUrl || scriptUrl === 'YOUR_APPS_SCRIPT_URL_HERE') {
+      alert('The Apps Script URL has not been configured yet. Please update SCRIPT_URL in the HTML file.');
       return;
     }
 
